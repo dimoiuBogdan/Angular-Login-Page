@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="login-box">
+    <div class="avatar-section">
+      <div class="avatar">
+        <img src="../../assets/download.png" alt="" />
+      </div>
+      <h3>Welcome, Please Login</h3>
+    </div>
+    <div class="login-form">
+      <label [ngClass]="{ error: isEmpty[0] }" for="username">Username </label>
+      <input type="text" [(ngModel)]="username" />
+      <label [ngClass]="{ error: isEmpty[1] }" for="password">Password </label>
+      <input type="text" [(ngModel)]="password" />
+      <div class="buttons">
+        <button class="login" (click)="login()">Log In</button>
+        <button class="guest" (click)="goAsGuest()">Continue as Guest</button>
+      </div>
+    </div>
+  </div>
+</div>

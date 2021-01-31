@@ -1,0 +1,14 @@
+.content {
+  max-width: 50%;
+  margin: 0 auto;
+  padding-top: 10vh;
+  color: white;
+  .quote {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-weight: 300;
+  }
+}

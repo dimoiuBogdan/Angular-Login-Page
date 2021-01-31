@@ -1,0 +1,8 @@
+<div class="content">
+  <app-input-menu></app-input-menu>
+  <div class="quote" *ngFor="let quote of quotes">
+    <h2>{{ quote.id }}.</h2>
+    <h2>{{ quote.content }}</h2>
+    <h2><sub>by</sub> {{ quote.author }}</h2>
+  </div>
+</div>
