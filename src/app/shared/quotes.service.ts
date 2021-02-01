@@ -1,29 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Quote } from './quote.model';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuotesService {
-  private quotes: Quote[] = [
+  private quotes = [
     {
-      id: 1,
-      content:
-        'When you think you are done, remember, you are only at your 40%',
-      author: 'Bobita',
-      type: 'Motivational',
+      quoteId: 1,
+      content: 'Quote numero uno',
+      author: 'Bobs',
+      type: 'Educational',
     },
     {
-      id: 2,
-      content: 'Flai flai batarflai',
-      author: 'Deni',
+      quoteId: 2,
+      content: 'Quote numero dos',
+      author: 'Tons',
       type: 'Lifestyle',
     },
     {
-      id: 3,
-      content: 'Ami plake penis',
-      author: 'Pingu',
-      type: 'Educational',
+      quoteId: 3,
+      content: 'Quote numero tres',
+      author: 'Pings',
+      type: 'Motivational',
     },
   ];
   private accounts = [
@@ -43,6 +41,20 @@ export class QuotesService {
 
   getQuotes() {
     return this.quotes;
+  }
+
+  postQuote(content: string, author: string, type: string) {
+    const quoteId = this.quotes.length + 1;
+    const quote = { quoteId, content, author, type };
+    this.quotes.push(quote);
+  }
+
+  quotesFiltered = new EventEmitter<string>();
+  filterQuotes(type?: string) {
+    const filteredQuotes = this.quotes.filter((quote) => {
+      return quote.type === type;
+    });
+    return filteredQuotes;
   }
 
   checkAccount(username: string, password: string): boolean {

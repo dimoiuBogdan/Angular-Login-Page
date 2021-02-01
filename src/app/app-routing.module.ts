@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppInterfaceComponent } from './app-interface/app-interface.component';
+import { AuthGuard } from './login-box/auth.guard';
 import { LoginBoxComponent } from './login-box/login-box.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'app',
     component: AppInterfaceComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

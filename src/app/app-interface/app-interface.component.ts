@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Quote } from '../shared/quote.model';
 import { QuotesService } from '../shared/quotes.service';
 
 @Component({
@@ -8,11 +7,17 @@ import { QuotesService } from '../shared/quotes.service';
   styleUrls: ['./app-interface.component.scss'],
 })
 export class AppInterfaceComponent implements OnInit {
-  quotes: Quote[];
+  quotes = [];
 
-  constructor(private QuotesService: QuotesService) {}
+  constructor(private QuotesService: QuotesService) {
+    this.QuotesService.quotesFiltered.subscribe((type: string) => {
+      this.quotes = this.QuotesService.filterQuotes(type);
+    });
+  }
 
   ngOnInit(): void {
     this.quotes = this.QuotesService.getQuotes();
   }
+
+  onFilter() {}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuotesService } from '../shared/quotes.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login-box',
@@ -12,20 +13,26 @@ export class LoginBoxComponent implements OnInit {
   password: string;
   isEmpty = [false, false];
 
-  constructor(private router: Router, private QuoteService: QuotesService) {}
+  constructor(
+    private router: Router,
+    private QuoteService: QuotesService,
+    private AuthService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
   goAsGuest() {
+    this.AuthService.login();
     this.router.navigate(['/app'], {
-      queryParams: { allowEdit: '0' },
+      queryParams: { allowEdit: false },
       fragment: 'guest',
     });
   }
 
   goAsUser() {
+    this.AuthService.login();
     this.router.navigate(['/app'], {
-      queryParams: { allowEdit: '1' },
+      queryParams: { allowEdit: this.AuthService.loggedIn },
       fragment: this.username,
     });
   }
@@ -38,9 +45,9 @@ export class LoginBoxComponent implements OnInit {
           this.isEmpty[1] = this.isEmpty[0] = false;
         }, 3000)
       : null;
-    if (this.QuoteService.checkAccount(this.username, this.password) === true)
+    if (this.QuoteService.checkAccount(this.username, this.password) === true) {
       this.goAsUser();
-    else if (this.username && this.password)
+    } else if (this.username && this.password)
       confirm('The credentials do not match');
   }
 }

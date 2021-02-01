@@ -1,11 +1,39 @@
 <div class="content">
-  <div class="input">
-    <input type="text" />
-    <h3>Post</h3>
+  <div class="input" *ngIf="allowEdit === true">
+    <input
+      type="text"
+      *ngIf="!enteredContent"
+      [(ngModel)]="content"
+      placeholder="Quote comes here"
+    />
+    <input
+      type="text"
+      *ngIf="enteredContent"
+      [(ngModel)]="author"
+      placeholder="Author comes here"
+    />
+    <h3 *ngIf="type && enteredContent" (click)="postQuote()">Post</h3>
+    <h3
+      *ngIf="type && !enteredContent"
+      (click)="enteredContent = !enteredContent"
+    >
+      Author
+    </h3>
+    <div *ngIf="!type" class="type">
+      <h3 (click)="showTypeMenu = !showTypeMenu">Type</h3>
+      <h3 (click)="showTypeMenu = !showTypeMenu">Type</h3>
+      <div *ngIf="showTypeMenu" class="type-menu">
+        <select name="types" [(ngModel)]="type">
+          <option value="Lifestyle">Lifestyle</option>
+          <option value="Motivational">Motivational</option>
+          <option value="Educational">Educational</option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="menu">
-    <button>Lifestyle</button>
-    <button>Motivational</button>
-    <button>Educational</button>
+    <button (click)="filterQuotes('Lifestyle')">Lifestyle</button>
+    <button (click)="filterQuotes('Motivational')">Motivational</button>
+    <button (click)="filterQuotes('Educational')">Educational</button>
   </div>
 </div>
