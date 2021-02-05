@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuotesService } from '../shared/quotes.service';
 import { AuthService } from './auth.service';
@@ -9,6 +9,8 @@ import { AuthService } from './auth.service';
   styleUrls: ['./login-box.component.scss'],
 })
 export class LoginBoxComponent implements OnInit {
+  @ViewChild('usernameInput') usernameInput: ElementRef;
+  @ViewChild('passwordInput') passwordInput: ElementRef;
   username: string;
   password: string;
   isEmpty = [false, false];
@@ -49,5 +51,10 @@ export class LoginBoxComponent implements OnInit {
       this.goAsUser();
     } else if (this.username && this.password)
       confirm('The credentials do not match');
+  }
+
+  focusPassInput() {
+    if (this.usernameInput.nativeElement.focus)
+      this.passwordInput.nativeElement.focus();
   }
 }

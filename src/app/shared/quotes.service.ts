@@ -1,10 +1,12 @@
+import { ThrowStmt } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Quote } from './quote.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuotesService {
-  private quotes = [
+  private quotes: Quote[] = [
     {
       quoteId: 1,
       content: 'Quote numero uno',
@@ -64,6 +66,26 @@ export class QuotesService {
         match = true;
     });
     return match;
+  }
+
+  deleteQuote(index: number) {
+    this.quotes.splice(index, 1);
+  }
+
+  public uniqueQuoteChanged = new EventEmitter<Quote>();
+  getUniqueQuote(index: number) {
+    this.uniqueQuoteChanged.emit(this.quotes[index]);
+  }
+
+  editUniqueQuote(
+    index: number,
+    content: string,
+    author: string,
+    type: string
+  ) {
+    if (content) this.quotes[index].content = content;
+    if (author) this.quotes[index].author = author;
+    if (type !== 'Select') this.quotes[index].type = type;
   }
 
   constructor() {}

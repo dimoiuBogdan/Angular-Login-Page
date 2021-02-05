@@ -1,0 +1,23 @@
+<div class="content" *ngIf="quoteDetails">
+  <h2 style="text-align: center">
+    Edit Quote Number {{ quoteDetails.quoteId }}
+  </h2>
+  <div class="quote quote-content">
+    <label for="quote-content">Content</label>
+    <input type="text" [(ngModel)]="newContent" />
+  </div>
+  <div class="quote quote-author">
+    <label for="quote-author">Author</label>
+    <input type="text" [(ngModel)]="newAuthor" />
+  </div>
+  <div class="quote type-menu">
+    <label for="types">Type</label>
+    <select name="types" [(ngModel)]="newType">
+      <option disabled selected value="Select">Select</option>
+      <option value="Lifestyle">Lifestyle</option>
+      <option value="Motivational">Motivational</option>
+      <option value="Educational">Educational</option>
+    </select>
+  </div>
+  <button (click)="confirmEdit()">Edit</button>
+</div>

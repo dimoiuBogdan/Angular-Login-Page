@@ -1,8 +1,24 @@
 <div class="content">
+  <button (click)="logout()">Back</button>
   <app-input-menu></app-input-menu>
-  <div class="quote" *ngFor="let quote of quotes">
+  <div class="quote" *ngFor="let quote of quotes; let i = index">
+    <div class="modify-quote">
+      <img src="../../assets/delete.svg" alt="trash" (click)="deleteQuote(i)" />
+      <img
+        id="edit-toggle"
+        src="../../assets/edit.svg"
+        alt="edit"
+        (click)="showEditModal = !showEditModal"
+        (click)="editContent(i)"
+      />
+    </div>
     <h2>{{ quote.quoteId }}.</h2>
-    <h2>{{ quote.content }}</h2>
-    <h2><sub>by</sub> {{ quote.author }}</h2>
+    <h2 class="quoteContent">{{ quote.content }}</h2>
+    <h2 style="color: rgba(255, 255, 255, 0.8)">
+      <sub>by</sub> {{ quote.author }}
+    </h2>
+  </div>
+  <div #insideElement id="edit-modal" *ngIf="showEditModal">
+    <app-edit-modal></app-edit-modal>
   </div>
 </div>

@@ -8,9 +8,14 @@
     </div>
     <div class="login-form">
       <label [ngClass]="{ error: isEmpty[0] }" for="username">Username </label>
-      <input type="text" [(ngModel)]="username" />
+      <input
+        type="text"
+        [(ngModel)]="username"
+        (keyup.enter)="focusPassInput()"
+        #usernameInput
+      />
       <label [ngClass]="{ error: isEmpty[1] }" for="password">Password </label>
-      <input type="text" [(ngModel)]="password" />
+      <input type="text" [(ngModel)]="password" #passwordInput />
       <div class="buttons">
         <button class="login" (click)="login()">Log In</button>
         <button class="guest" (click)="goAsGuest()">Continue as Guest</button>

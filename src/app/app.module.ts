@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginBoxComponent } from './login-box/login-box.component';
 import { AppInterfaceComponent } from './app-interface/app-interface.component';
 import { InputMenuComponent } from './input-menu/input-menu.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { InputMenuComponent } from './input-menu/input-menu.component';
     LoginBoxComponent,
     AppInterfaceComponent,
     InputMenuComponent,
+    EditModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
