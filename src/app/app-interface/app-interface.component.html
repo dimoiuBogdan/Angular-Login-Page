@@ -3,8 +3,14 @@
   <app-input-menu></app-input-menu>
   <div class="quote" *ngFor="let quote of quotes; let i = index">
     <div class="modify-quote">
-      <img src="../../assets/delete.svg" alt="trash" (click)="deleteQuote(i)" />
       <img
+        *ngIf="loggedIn"
+        src="../../assets/delete.svg"
+        alt="trash"
+        (click)="deleteQuote(i)"
+      />
+      <img
+        *ngIf="loggedIn"
         id="edit-toggle"
         src="../../assets/edit.svg"
         alt="edit"

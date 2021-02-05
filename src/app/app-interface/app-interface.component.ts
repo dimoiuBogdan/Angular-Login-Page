@@ -1,6 +1,11 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { faTintSlash } from '@fortawesome/free-solid-svg-icons';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../login-box/auth.service';
 import { QuotesService } from '../shared/quotes.service';
 
@@ -10,14 +15,16 @@ import { QuotesService } from '../shared/quotes.service';
   styleUrls: ['./app-interface.component.scss'],
 })
 export class AppInterfaceComponent implements OnInit {
-  @ViewChild('insideElement') insideElement;
+  @ViewChild('insideElement') insideElement: ElementRef;
   quotes = [];
   showEditModal = false;
+  loggedIn: boolean = false;
 
   constructor(
     private QuotesService: QuotesService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.QuotesService.quotesFiltered.subscribe((type: string) => {
       this.quotes = this.QuotesService.filterQuotes(type);
@@ -25,6 +32,8 @@ export class AppInterfaceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const loggedIn = this.route.snapshot.queryParams.allowEdit;
+    this.loggedIn = loggedIn === 'true' ? true : false;
     this.quotes = this.QuotesService.getQuotes();
   }
 
